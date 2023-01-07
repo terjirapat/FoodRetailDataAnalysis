@@ -1,5 +1,30 @@
 # FoodRetailDataAnalysis
-Question
+
+## Cleaning
+
+![image](https://user-images.githubusercontent.com/77285026/211143718-174cf270-058a-46c5-ac4a-dfee494d5ef7.png)
+
+พบ column 'dollar_sales' มีค่าติดลบ และ column 'units' มีค่า outliner จึงทำการลบ data ส่วนนั้นออกโดย outliner ลบในส่วนที่เกิน mean+-3SD
+
+ซึ่ง data หลัง clean แล้วเหลือทั้งหมด 5,184,441 row จาก 5,197,681 row คิดเป็น ~99.74%
+
+![image](https://user-images.githubusercontent.com/77285026/211143998-786daa28-2df2-4f50-9522-3664f0141fcc.png)
+
+
+```python
+def filter_outliner(df, column_name):
+    q_low = df[column_name].quantile(0.003) # mean-3sd
+    q_hi  = df[column_name].quantile(0.997) # mean+3sd
+    df_filtered = df[(df[column_name] <= q_hi) & (df[column_name] >= q_low)]
+    return df_filtered
+    
+df =  filter_outliner(df, 'units')
+# before removed 5,197,681 row
+# after removed 5,184,441 row
+```
+
+
+## Question
 1. ต้องการจัด segment ของลูกค้า ?
 2. สินค้ากลุ่มไหนที่คนมักจะซื้อด้วยกัน ?
 3. เวลาไหนที่ขายดีที่สุด ?
@@ -52,5 +77,33 @@ Question
 
 พบว่าช่วงที่ average basket size สูงคนจะซื้อสินค้าต่อครั้งเยอะขึ้น
 
+## Question 4: 
+![image](https://user-images.githubusercontent.com/77285026/211144038-7ac36b11-8ca7-47d3-acab-fd990c18efcd.png)
+
+## Question 5: 
+![image](https://user-images.githubusercontent.com/77285026/211144071-de87a45e-a05a-44fe-8a91-45011be60aaf.png)
+![image](https://user-images.githubusercontent.com/77285026/211144080-9d15e1c1-b879-423e-90db-03d1f2d865e9.png)
+
+product ที่ยอดขายสูงสุดสิบอันดับส่วนใหญ่เป็น pasta รองลงมา pasta sauce
+
+![image](https://user-images.githubusercontent.com/77285026/211144133-dd6caa87-1a28-4da4-b81b-ea40d3ff8be2.png)
+
+แต่ถ้าดูรวมๆ pasta sauce สร้างยอดขายได้เยอะสุด
+
+![image](https://user-images.githubusercontent.com/77285026/211144149-1b5567d1-c4b7-49c6-9a9d-d8dfcfd1289e.png)
+
+brand ที่ได้ยอดขายสูงสุดเป็น private label
+
+![image](https://user-images.githubusercontent.com/77285026/211144166-9366a1f4-f045-4d45-9429-def98c01aaa6.png)
+
+private label ขาย pasta ได้เยอะแต่ pasta sauce น้อย ส่วน pancake และ syrups ก็ไม่เป็นที่ 1
+
+![image](https://user-images.githubusercontent.com/77285026/211144288-30f1524f-cb40-40b3-9bd2-4f9999edd148.png)
+
+ถ้าดูสินค้าที่ยอดขายสูงสุดของแต่ละ category 5 อันดับ private label ชนะขาดแค่ pasta ส่วนอันอื่นโดนแซงหมดแทบไม่ติดอันดับเลย
+
+![image](https://user-images.githubusercontent.com/77285026/211144296-f7b47d1f-f9d3-4343-a0e2-1213f6c2fc15.png)
+
+assumption ว่ามีสินค้าน้อยไปไม่หลากหลายพอมา filter ดูสินค้ามีเยอะแต่ไม่เป็นที่นิยม อาจจะไม่อร่อยหรือคนไม่เคยลอง
 
 
