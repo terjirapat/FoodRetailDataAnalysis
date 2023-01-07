@@ -2,6 +2,7 @@
 
 RFM Analysis
 นำข้อมูลลูกค้าแต่ละคนมาวิเคราะห์ เพื่อแบ่ง Segmentation ของลูกค้าออกเป็นกลุ่มๆ ผ่าน 3 criteria หลักๆ คือ
+
 R – Recency ลูกค้าซื้อล่าสุดเมื่อไหร่
 F – Frequency ความถี่ในการซื้อ 
 M – Monetary ปริมาณการซื้อ หรือ Basket Size 
