@@ -14,3 +14,10 @@ RFM Analysis
 - rfm score<1.6 :Lost Customer
 
 ![image](https://user-images.githubusercontent.com/77285026/211134775-bc68c51f-4b35-4b28-819f-d5b33fb08f5b.png)
+
+```python
+cust_id	RFM_Score	Customer_segment
+0	1	4.26	High value Customer
+1	10	2.93	Low Value Customers
+2	100	1.09	Lost Customers
+```
