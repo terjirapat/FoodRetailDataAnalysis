@@ -2,11 +2,15 @@
 
 ## Cleaning
 
-![image](https://user-images.githubusercontent.com/77285026/211143718-174cf270-058a-46c5-ac4a-dfee494d5ef7.png)
-
 พบ column 'dollar_sales' มีค่าติดลบ และ column 'units' มีค่า outliner จึงทำการลบ data ส่วนนั้นออกโดย outliner ลบในส่วนที่เกิน mean+-3SD
 
 ซึ่ง data หลัง clean แล้วเหลือทั้งหมด 5,184,441 row จาก 5,197,681 row คิดเป็น ~99.74%
+
+ก่อน
+
+![image](https://user-images.githubusercontent.com/77285026/211143718-174cf270-058a-46c5-ac4a-dfee494d5ef7.png)
+
+หลัง
 
 ![image](https://user-images.githubusercontent.com/77285026/211143998-786daa28-2df2-4f50-9522-3664f0141fcc.png)
 
@@ -28,6 +32,8 @@ df =  filter_outliner(df, 'units')
 1. ต้องการจัด segment ของลูกค้า ?
 2. สินค้ากลุ่มไหนที่คนมักจะซื้อด้วยกัน ?
 3. เวลาไหนที่ขายดีที่สุด ?
+4. ร้านไหนที่ลูกค้าเยอะ และใช้จ่ายต่อครั้งเยอะที่สุด ?
+5. จะเพิ่มกำไรอย่างไรดี ?
 
 ## Question 1: ต้องการจัด segment ของลูกค้า ?
 ### RFM Analysis
@@ -62,48 +68,62 @@ df =  filter_outliner(df, 'units')
 ซึ่งผลที่ได้มาสามารถนำไปจัดโปรโมชั่นคู่กันเพื่อเพิ่มยอดขายได้
 
 ## Question 3: เวลาไหนที่ขายดีที่สุด ?
-![image](https://user-images.githubusercontent.com/77285026/211138914-3cb11080-0009-4a9e-a79b-7bcb823cd410.png)
-![image](https://user-images.githubusercontent.com/77285026/211139146-ee1716f7-5b48-450c-ae83-42ad8025653a.png)
+![image](https://user-images.githubusercontent.com/77285026/211334774-e5e829db-b7be-403b-ad12-55927ff595ee.png)
 
-พบว่าช่วงเวลาที่ขายดีคือประมาณชั่วโมงที่ 10-17 ของวัน และสินค้าทุกชนิดขายดีในเวลานั้นเหมือนกันหมด
+พบว่าช่วงเวลาที่ขายดีคือประมาณชั่วโมงที่ 15-18 ของวัน และสินค้าทุกชนิดขายดีในเวลานั้นเหมือนกันหมด
 
 ![image](https://user-images.githubusercontent.com/77285026/211139094-857e1124-7837-4cf4-bcd4-aaac84790c62.png)
 
 และมองจาก average basket size คนจะใช้จ่ายต่อครั้งเยอะในประมาณชั่วโมงที่ 20-23 และ 0-3 ของวัน
 
-แต่ยังสงสัยว่าชั่วโมงที่ average basket size สูงคนซื้อสินค้าต่อครั้งเยอะหรือซื้อของราคาแพงขึ้น จึงหาค่าเฉลี่ยจำนวนสินค้าต่อการซื้อหนึ่งครั้ง
+แต่ยังสงสัยว่าชั่วโมงที่ average basket size สูง เกิดจากคนซื้อสินค้าต่อครั้งเยอะหรือซื้อสินค้าต่อชิ้นในราคาแพงขึ้น จึงหาค่าเฉลี่ยจำนวนสินค้าต่อการซื้อหนึ่งครั้ง และค่าเฉลี่ยนราคาสินค้าต่อชิ้น
 
-![image](https://user-images.githubusercontent.com/77285026/211143079-4c26af3f-dead-4539-865d-96aa5dd555e6.png)
+![image](https://user-images.githubusercontent.com/77285026/211338343-5946cfb6-5984-4c40-ab6d-dd2393cc30e9.png)
 
-พบว่าช่วงที่ average basket size สูงคนจะซื้อสินค้าต่อครั้งเยอะขึ้น
+พบว่าช่วงที่ average basket size เกิดจากคนซื้อสินค้าต่อครั้งเยอะหรือซื้อสินค้าต่อชิ้นในราคาแพงขึ้น
 
-## Question 4: 
+## Question 4: ร้านไหนที่ลูกค้าเยอะ และใช้จ่ายต่อครั้งเยอะที่สุด ?
+
 ![image](https://user-images.githubusercontent.com/77285026/211144038-7ac36b11-8ca7-47d3-acab-fd990c18efcd.png)
 
-## Question 5: 
-![image](https://user-images.githubusercontent.com/77285026/211144071-de87a45e-a05a-44fe-8a91-45011be60aaf.png)
-![image](https://user-images.githubusercontent.com/77285026/211144080-9d15e1c1-b879-423e-90db-03d1f2d865e9.png)
+![image](https://user-images.githubusercontent.com/77285026/211350859-4987d1e9-b96b-48b8-a114-ec519ceccecf.png)
+
+![image](https://user-images.githubusercontent.com/77285026/211352555-41155353-1420-4d27-8342-474dda10c585.png)
+
+## Question 5: จะเพิ่มกำไรอย่างไรดี ?
+โดยขั้นแรกจะมาทำการ EDA กันก่อนในส่วนเพื่อหาว่าจะเพิ่มกำไรในส่วนไหนได้บ้างเริ่มจากส่วน product
+
+![image](https://user-images.githubusercontent.com/77285026/211304706-5bbb8f6b-0ac5-44a9-ba44-4bfd413afcbf.png)
 
 product ที่ยอดขายสูงสุดสิบอันดับส่วนใหญ่เป็น pasta รองลงมา pasta sauce
 
-![image](https://user-images.githubusercontent.com/77285026/211144133-dd6caa87-1a28-4da4-b81b-ea40d3ff8be2.png)
+![image](https://user-images.githubusercontent.com/77285026/211305456-1088be7b-2cd6-4ac2-a099-7c5f7a43d6d3.png)
 
-แต่ถ้าดูรวมๆ pasta sauce สร้างยอดขายได้เยอะสุด
+แต่ถ้าดูยอดขายแยกตาม commodity แล้ว pasta sauce สร้างยอดขายได้เยอะที่สุด
 
-![image](https://user-images.githubusercontent.com/77285026/211144149-1b5567d1-c4b7-49c6-9a9d-d8dfcfd1289e.png)
+![image](https://user-images.githubusercontent.com/77285026/211305516-4df2af4f-5d28-41bc-a5f5-4a584d76555e.png)
 
 brand ที่ได้ยอดขายสูงสุดเป็น private label
 
-![image](https://user-images.githubusercontent.com/77285026/211144166-9366a1f4-f045-4d45-9429-def98c01aaa6.png)
+assumption : private label น่าจะได้กำไรเยอะที่สุด เพราะ ผลิตเอง ซึ่งถ้าสามารถเพิ่มยอดขาย brand private label ได้น่าจะทำให้กำไรเพิ่มขึ้น
 
-private label ขาย pasta ได้เยอะแต่ pasta sauce น้อย ส่วน pancake และ syrups ก็ไม่เป็นที่ 1
+ทีนี้มาดูว่าจะเพิ่มยอดขาย brand นี้ได้ยังไงบ้างเริ่มจากสำรวจต่อไป
 
-![image](https://user-images.githubusercontent.com/77285026/211144288-30f1524f-cb40-40b3-9bd2-4f9999edd148.png)
+![image](https://user-images.githubusercontent.com/77285026/211330296-72b17c94-72be-4654-a129-545a2752c44b.png)
 
-ถ้าดูสินค้าที่ยอดขายสูงสุดของแต่ละ category 5 อันดับ private label ชนะขาดแค่ pasta ส่วนอันอื่นโดนแซงหมดแทบไม่ติดอันดับเลย
+private label ขาย pasta ได้เยอะแต่ pasta sauce, pancake และ syrups ยังมียอดขายน้อยกว่า brand อื่น
 
-![image](https://user-images.githubusercontent.com/77285026/211144296-f7b47d1f-f9d3-4343-a0e2-1213f6c2fc15.png)
+![image](https://user-images.githubusercontent.com/77285026/211330673-7cc3d06e-8681-4dd7-95a1-9ac00c839eb8.png)
 
-assumption ว่ามีสินค้าน้อยไปไม่หลากหลายพอมา filter ดูสินค้ามีเยอะแต่ไม่เป็นที่นิยม อาจจะไม่อร่อยหรือคนไม่เคยลอง
+ถ้าดูสินค้าที่ยอดขายสูงสุดของแต่ละ category 5 อันดับ private label มีสินค้า pasta ขายดีมาก ส่วน pasta sauce, pancake และ syrups มีสินค้าที่ขายดีแค่ชิ้นสองชิ้น
+
+assumption : สินค้าของ private label อาจมีน้อยเกินไปหรือไม่ ทำให้ยอดขายใน pasta sauce, pancake และ syrups มีน้อย
+
+![image](https://user-images.githubusercontent.com/77285026/211331193-21cf75a9-97f2-4748-8692-d272a02ba9bc.png)
+
+เมื่อลองดูแล้วมีสินค้าเยอะแต่แค่ขายไม่ดี
+
+solution : อาจจับคู่ชนิดสินค้าที่คนมักจะซื้อด้วยกันทำเป็นโปรโมชั่นลดราคา และวางขายใกล้ๆกัน ซึ่งอ้างอิงจาก basket analysis ที่พบสองความสัมพันธ์ของ (syrups, pancake mixes) และ (pasta sauce, pasta) จึงควรจับคู่สองกลุ่มนี้ เพื่อเพิ่มยอดขายแบรน private label ในสินค้าชนิด pasta sauce, pancake และ syrups
+
 
 
